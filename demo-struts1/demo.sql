@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS spotify_song (
 	 PRIMARY KEY ( id )
 );
 
-INSERT IGNORE INTO `spotify_song` (`track_name`,`artist_name`,`genre`,`popularity`) VALUES
+INSERT INTO `spotify_song` (`track_name`,`artist_name`,`genre`,`popularity`) VALUES
 ('Senorita','Shawn Mendes','canadian pop',79),
 ('China','Anuel AA','reggaeton flow',92),
 ('boyfriend (with Social House)','Ariana Grande','dance pop',85),
@@ -38,6 +38,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `User_un_username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT IGNORE INTO `user`
+INSERT INTO `user`
 (id,email, username, password, full_name, is_enable,created)
 VALUES('9afb2853-7e37-498f-a7f5-08199e3964f6','test1@gmail.com', 'demo_test1', '$2a$10$/DlV8jJGrPXqDeoFNi.IDOwpLGkHh1QicjhIvwpInCJMWv.SpfrRy', 'Demo Test1', 1, NOW());
