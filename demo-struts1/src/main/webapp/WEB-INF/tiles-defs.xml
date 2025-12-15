@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.0//EN" "http://tiles.apache.org/dtd/tiles-config_1_0.dtd">
+
+<tiles-definitions>
+
+    <definition name="tiles.common.layout" template="/WEB-INF/view/common/baseLayout.jsp">
+        <put name="header" value="/WEB-INF/view/common/header.jsp"/>
+        <put name="footer" value="/WEB-INF/view/common/footer.jsp"/>
+        <put name="navBar" value="/WEB-INF/view/common/navBar.jsp"/>
+        <put name="sideNav" value="/WEB-INF/view/common/sideNav.jsp"/>
+        <put name="body" value="/WEB-INF/view/common/defaultBody.jsp"/>
+        <put name="script" value="/WEB-INF/view/common/loadScript.jsp"/>
+    </definition>
+
+    <definition name="tiles.common.plainLayout" template="/WEB-INF/view/common/plainLayout.jsp">
+        <put name="header" value="/WEB-INF/view/common/header.jsp"/>
+        <put name="body" value="/WEB-INF/view/common/defaultBody.jsp"/>
+        <put name="footer" value="/WEB-INF/view/common/footer.jsp"/>
+        <put name="script" value="/WEB-INF/view/common/loadScript.jsp"/>
+    </definition>
+
+    <definition name="tiles.dashboard" extends="tiles.common.layout">
+        <put name="body" value="/WEB-INF/view/dashboard.jsp"/>
+    </definition>
+
+    <definition name="tiles.spotify.list" extends="tiles.common.layout">
+        <put name="body" value="/WEB-INF/view/spotifyList.jsp"/>
+    </definition>
+
+    <definition name="tiles.spotify.list.pagination" extends="tiles.common.layout">
+        <put name="body" value="/WEB-INF/view/spotifyListPagination.jsp"/>
+    </definition>
+
+    <definition name="tiles.spotify.init" extends="tiles.common.layout">
+        <put name="body" value="/WEB-INF/view/spotifyInit.jsp"/>
+    </definition>
+
+    <definition name="tiles.logon" extends="tiles.common.plainLayout">
+        <put name="body" value="/WEB-INF/view/login.jsp"/>
+    </definition>
+
+</tiles-definitions>
