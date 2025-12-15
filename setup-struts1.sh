@@ -78,8 +78,8 @@ if [ ! -d "demo-struts1" ]; then
     exit 1
 fi
 
-cd demo-struts1
-print_success "demo-struts1ディレクトリに移動しました"
+cd demo-struts1/demo-struts1
+print_success "demo-struts1ディレクトリに移動しました
 
 
 
@@ -140,7 +140,7 @@ echo ""
 print_success "=== セットアップが完了しました！ ==="
 echo ""
 print_info "アプリケーションを起動するには以下のコマンドを実行してください:"
-echo "  cd demo-struts1"
+echo "  cd demo-struts1/demo-struts1"
 echo "  mvn jetty:run"
 echo ""
 print_info "起動後、以下のURLでアクセスできます:"
