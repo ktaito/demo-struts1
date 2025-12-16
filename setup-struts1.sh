@@ -79,7 +79,7 @@ if [ ! -d "demo-struts1" ]; then
 fi
 
 cd demo-struts1/demo-struts1
-print_success "demo-struts1ディレクトリに移動しました
+print_success "demo-struts1ディレクトリに移動しました"
 
 
 
