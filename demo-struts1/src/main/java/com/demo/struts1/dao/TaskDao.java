@@ -1,7 +1,7 @@
 package com.demo.struts1.dao;
 
-import com.demo.struts1.form.SpotifyForm;
-import com.demo.struts1.model.Spotify;
+import com.demo.struts1.form.TaskForm;
+import com.demo.struts1.model.Task;
 import com.demo.struts1.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -13,22 +13,22 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SpotifyDao {
+public class TaskDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(SpotifyDao.class);
+    private static final Logger logger = LoggerFactory.getLogger(TaskDao.class);
 
-    public SpotifyDao() {
+    public TaskDao() {
     }
 
-    public List<Spotify> getAll() {
+    public List<Task> getAll() {
 
         Session session = HibernateUtil.getSession();
-        List<Spotify> data = null;
+        List<Task> data = null;
 
         try {
 
             session.beginTransaction();
-            Query<Spotify> query = session.createQuery("FROM Spotify", Spotify.class);
+            Query<Task> query = session.createQuery("FROM Task", Task.class);
             data = query.list();
 
         } catch (Exception e) {
@@ -42,14 +42,14 @@ public class SpotifyDao {
         return data;
     }
 
-    public List<Spotify> findByPaginated(int start, int maxResults) {
+    public List<Task> findByPaginated(int start, int maxResults) {
         Session session = HibernateUtil.getSession();
-        List<Spotify> data = null;
+        List<Task> data = null;
 
         try {
 
             session.beginTransaction();
-            Criteria query = session.createCriteria(Spotify.class);
+            Criteria query = session.createCriteria(Task.class);
             query.setFirstResult(start);
             query.setMaxResults(maxResults);
 
@@ -76,7 +76,7 @@ public class SpotifyDao {
         try {
 
             session.beginTransaction();
-            Criteria query = session.createCriteria(Spotify.class);
+            Criteria query = session.createCriteria(Task.class);
             query.setProjection(Projections.rowCount());
 
             total = (Long) query.uniqueResult();
@@ -93,14 +93,14 @@ public class SpotifyDao {
 
     }
 
-    public boolean createSpotify(Spotify spotifyData) {
+    public boolean createTask(Task taskData) {
         Session session = HibernateUtil.getSession();
         boolean isSuccess = false;
 
         try {
 
             session.beginTransaction();
-            session.save(spotifyData);
+            session.save(taskData);
             session.getTransaction().commit();
 
             isSuccess = true;
@@ -120,29 +120,29 @@ public class SpotifyDao {
         return isSuccess;
     }
 
-    public boolean updateSpotify(SpotifyForm spotify) {
+    public boolean updateTask(TaskForm task) {
         Session session = HibernateUtil.getSession();
         boolean isSuccess = false;
 
         try {
-            // Start a transaction
             session.beginTransaction();
 
-            Spotify existingData = session.get(Spotify.class, spotify.getId());
+            Task existingData = session.get(Task.class, task.getId());
 
             if (existingData != null) {
 
-                existingData.setTrackName(spotify.getTrackName());
-                existingData.setArtistName(spotify.getArtistName());
-                existingData.setPopularity(spotify.getPopularity());
-                existingData.setGenre(spotify.getGenre());
+                existingData.setTaskTitle(task.getTaskTitle());
+                existingData.setAssignee(task.getAssignee());
+                existingData.setPriority(task.getPriority());
+                existingData.setCategory(task.getCategory());
+                existingData.setStatus(task.getStatus());
 
                 session.update(existingData);
                 session.getTransaction().commit();
 
                 isSuccess = true;
             } else {
-                logger.error("Spotify with id " + spotify.getId() + " not found.");
+                logger.error("Task with id " + task.getId() + " not found.");
             }
         } catch (Exception e) {
             if (session.getTransaction() != null) {
@@ -158,22 +158,22 @@ public class SpotifyDao {
         return isSuccess;
     }
 
-    public boolean deleteSpotify(Long id) {
+    public boolean deleteTask(Long id) {
         Session session = HibernateUtil.getSession();
         boolean isSuccess = false;
-        Spotify data = null;
+        Task data = null;
 
         try {
 
             session.beginTransaction();
-            data = session.get(Spotify.class, id);
+            data = session.get(Task.class, id);
 
             if (data != null) {
                 session.delete(data);
                 session.getTransaction().commit();
                 isSuccess = true;
             } else {
-                logger.warn("Spotify with id " + id + " not found.");
+                logger.warn("Task with id " + id + " not found.");
             }
 
         } catch (Exception e) {
@@ -181,7 +181,7 @@ public class SpotifyDao {
             if (session.getTransaction() != null) {
                 session.getTransaction().rollback();
             }
-            logger.error("Error deleting Spotify", e);
+            logger.error("Error deleting Task", e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -191,14 +191,13 @@ public class SpotifyDao {
         return isSuccess;
     }
 
-    public Spotify getById(Long id) {
+    public Task getById(Long id) {
         Session session = HibernateUtil.getSession();
-        Spotify data = null;
+        Task data = null;
         try {
-            // Begin a transaction
             session.beginTransaction();
 
-            data = session.get(Spotify.class, id);
+            data = session.get(Task.class, id);
 
         } catch (Exception e) {
             if (session.getTransaction() != null) {

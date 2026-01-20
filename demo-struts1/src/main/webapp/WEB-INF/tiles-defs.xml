@@ -23,16 +23,16 @@
         <put name="body" value="/WEB-INF/view/dashboard.jsp"/>
     </definition>
 
-    <definition name="tiles.spotify.list" extends="tiles.common.layout">
-        <put name="body" value="/WEB-INF/view/spotifyList.jsp"/>
+    <definition name="tiles.task.list" extends="tiles.common.layout">
+        <put name="body" value="/WEB-INF/view/taskList.jsp"/>
     </definition>
 
-    <definition name="tiles.spotify.list.pagination" extends="tiles.common.layout">
-        <put name="body" value="/WEB-INF/view/spotifyListPagination.jsp"/>
+    <definition name="tiles.task.list.pagination" extends="tiles.common.layout">
+        <put name="body" value="/WEB-INF/view/taskListPagination.jsp"/>
     </definition>
 
-    <definition name="tiles.spotify.init" extends="tiles.common.layout">
-        <put name="body" value="/WEB-INF/view/spotifyInit.jsp"/>
+    <definition name="tiles.task.init" extends="tiles.common.layout">
+        <put name="body" value="/WEB-INF/view/taskInit.jsp"/>
     </definition>
 
     <definition name="tiles.logon" extends="tiles.common.plainLayout">

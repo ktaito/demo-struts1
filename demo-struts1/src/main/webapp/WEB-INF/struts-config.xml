@@ -8,7 +8,7 @@
 
     <form-beans>
         <form-bean name="dashboardForm" type="com.demo.struts1.form.DashboardForm" />
-        <form-bean name="spotifyForm" type="com.demo.struts1.form.SpotifyForm"/>
+        <form-bean name="taskForm" type="com.demo.struts1.form.TaskForm"/>
         <form-bean name="loginForm" type="com.demo.struts1.form.LoginForm"/>
 
     </form-beans>
@@ -23,31 +23,16 @@
             <forward name="success" path="tiles.dashboard" />
             <forward name="login" path="/login.do" />
         </action>
-        <action path="/spotify-list" type="com.demo.struts1.action.Spotify.SpotifyListAction">
-            <forward name="success" path="tiles.spotify.list" />
+        <action path="/task-list" type="com.demo.struts1.action.Task.TaskListAction">
+            <forward name="success" path="tiles.task.list" />
             <forward name="login" path="/login.do" />
         </action>
-        <action path="/spotify-pagination" type="com.demo.struts1.action.Spotify.SpotifyListPaginationAction" scope="request" validate="false">
-            <forward name="success" path="tiles.spotify.list.pagination"/>
+        <action path="/task-pagination" type="com.demo.struts1.action.Task.TaskListPaginationAction" scope="request" validate="false">
+            <forward name="success" path="tiles.task.list.pagination"/>
             <forward name="login" path="/login.do" />
         </action>
-        <action path="/spotify-init" type="com.demo.struts1.action.Spotify.SpotifyInitAction" name="spotifyForm" scope="request" validate="false" input="tiles.spotify.init">
-            <forward name="success" path="tiles.spotify.init"/>
-            <forward name="login" path="/login.do" />
-        </action>
-        <action path="/spotify-create" type="com.demo.struts1.action.Spotify.SpotifyCreateAction" name="spotifyForm" scope="request" validate="true" input="tiles.spotify.init">
-            <forward name="success" path="/spotify-pagination.do"/>
-            <forward name="failure" path="tiles.spotify.init"/>
-            <forward name="login" path="/login.do" />
-        </action>
-        <action path="/spotify-update" type="com.demo.struts1.action.Spotify.SpotifyUpdateAction" name="spotifyForm" scope="request" validate="true" input="tiles.spotify.init">
-            <forward name="success" path="/spotify-pagination.do"/>
-            <forward name="failure" path="tiles.spotify.init"/>
-            <forward name="login" path="/login.do" />
-        </action>
-        <action path="/spotify-delete" type="com.demo.struts1.action.Spotify.SpotifyDeleteAction" name="spotifyForm" scope="request" validate="true" input="tiles.spotify.init">
-            <forward name="success" path="/spotify-pagination.do"/>
-            <forward name="failure" path="tiles.spotify.init"/>
+        <action path="/task-init" type="com.demo.struts1.action.Task.TaskInitAction" name="taskForm" scope="request" validate="false" input="tiles.task.init">
+            <forward name="success" path="tiles.task.init"/>
             <forward name="login" path="/login.do" />
         </action>
         <action path="/logout" type="com.demo.struts1.action.User.LogoutAction">

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+    <class name="com.demo.struts1.model.Task" table="task">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="taskTitle" column="task_title" not-null="true" />
+        <property name="assignee" column="assignee" not-null="true" />
+        <property name="category" column="category" not-null="true" />
+        <property name="priority" column="priority" not-null="true" />
+        <property name="status" column="status" not-null="true" />
+    </class>
+
+</hibernate-mapping>

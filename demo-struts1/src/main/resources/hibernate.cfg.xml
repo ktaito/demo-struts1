@@ -25,7 +25,7 @@
         <!-- Drop and re-create the database schema on startup -->
 
         <!-- Specify annotated classes -->
-        <mapping resource="model/spotify.hbm.xml"/>
+        <mapping resource="model/task.hbm.xml"/>
         <mapping resource="model/user.hbm.xml"/>
 
     </session-factory>

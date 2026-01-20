@@ -1,28 +1,29 @@
-CREATE TABLE IF NOT EXISTS spotify_song (
+CREATE TABLE IF NOT EXISTS task (
 	id BIGINT NOT NULL AUTO_INCREMENT,
-	track_name VARCHAR(45) NOT NULL,
-	artist_name VARCHAR(45) NOT NULL,
-	genre VARCHAR(45) NOT NULL,
-	popularity INT NOT NULL,
+	task_title VARCHAR(100) NOT NULL,
+	assignee VARCHAR(50) NOT NULL,
+	category VARCHAR(50) NOT NULL,
+	priority INT NOT NULL,
+	status VARCHAR(20) NOT NULL,
 	 PRIMARY KEY ( id )
 );
 
-INSERT INTO `spotify_song` (`track_name`,`artist_name`,`genre`,`popularity`) VALUES
-('Senorita','Shawn Mendes','canadian pop',79),
-('China','Anuel AA','reggaeton flow',92),
-('boyfriend (with Social House)','Ariana Grande','dance pop',85),
-('Beautiful People (feat. Khalid)','Ed Sheeran','pop',86),
-('Goodbyes (Feat. Young Thug)','Post Malone','rap',94),
-('I Dont Care (with Justin Bieber)','Ed Sheeran','pop',84),
-('bad guy','Billie Eilish','electropop',95),
-('Callaita','Bad Bunny','reggaeton',93),
-('Ransom','Lil Tecca','trap music',92),
-('How Do You Sleep?','Sam Smith','pop',90),
-('Old Town Road - Remix','Lil Nas X','country rap',87),
-('Loco Contigo (feat. J. Balvin & Tyga)','DJ Snake','dance pop',86),
-('Someone You Loved','Lewis Capaldi','pop',88),
-('Otro Trago - Remix','Sech','panamanian pop',87),
-('Money In The Grave (Drake ft. Rick Ross)','Drake','canadian hip hop',92);
+INSERT INTO `task` (`task_title`,`assignee`,`category`,`priority`,`status`) VALUES
+('プロジェクト提案書を作成','田中','仕事',85,'進行中'),
+('週次レポートを提出','佐藤','仕事',70,'未着手'),
+('クライアントミーティング準備','鈴木','仕事',90,'進行中'),
+('新機能の設計書レビュー','山田','仕事',75,'完了'),
+('英語の勉強','田中','勉強',50,'未着手'),
+('ジムに行く','佐藤','個人',40,'未着手'),
+('食材を買う','鈴木','買い物',60,'未着手'),
+('部屋の掃除','山田','家事',45,'進行中'),
+('確定申告の準備','田中','個人',95,'未着手'),
+('友人の誕生日プレゼント購入','佐藤','買い物',55,'完了'),
+('車の点検予約','鈴木','個人',65,'未着手'),
+('読書（ビジネス書）','山田','勉強',35,'進行中'),
+('洗濯','田中','家事',30,'完了'),
+('データベース最適化','佐藤','仕事',80,'進行中'),
+('チームビルディングイベント企画','鈴木','仕事',50,'未着手');
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` varchar(100) NOT NULL,

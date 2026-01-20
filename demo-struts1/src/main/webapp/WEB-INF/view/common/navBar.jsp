@@ -1,8 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<style>
+    .sb-topnav {
+        background: linear-gradient(90deg, #FF8C42 0%, #FF6B6B 100%) !important;
+    }
+    .navbar-brand {
+        color: white !important;
+        font-weight: bold;
+    }
+</style>
+
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="index.html">Demo Struts1</a>
+    <a class="navbar-brand ps-3" href="dashboard.do">タスク管理システム</a>
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
             class="fas fa-bars"></i></button>
@@ -13,7 +23,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="<c:url value='/logout.do' />">Logout</a></li>
+                <li><a class="dropdown-item" href="<c:url value='/logout.do' />">ログアウト</a></li>
             </ul>
         </li>
     </ul>

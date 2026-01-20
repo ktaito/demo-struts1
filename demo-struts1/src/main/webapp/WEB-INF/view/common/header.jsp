@@ -7,7 +7,11 @@
 
 <style>
     .datatable-pagination .datatable-active a, .datatable-pagination .datatable-active a:focus, .datatable-pagination .datatable-active a:hover {
-        background-color: #d9d9d9;
+        background-color: #FF8C42;
+        color: white;
         cursor:default
+    }
+    body {
+        background: #FFF8F0;
     }
 </style>
