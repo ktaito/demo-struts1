@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Struts1アプリケーション セットアップスクリプト
-# Amazon Linux 2023用
+# Ubuntu/Debian用
 
 set -e  # エラーが発生したら停止
 
@@ -31,7 +31,8 @@ if command -v java &> /dev/null; then
     print_success "Java is already installed: $JAVA_VERSION"
 else
     print_info "Javaがインストールされていません。Java 17をインストールします..."
-    sudo dnf install java-17-amazon-corretto-devel -y
+    sudo apt-get update
+    sudo apt-get install openjdk-17-jdk -y
     print_success "Java 17のインストールが完了しました"
 fi
 
@@ -45,7 +46,7 @@ if command -v mvn &> /dev/null; then
     print_success "Maven is already installed: $MVN_VERSION"
 else
     print_info "Mavenがインストールされていません。インストールします..."
-    sudo dnf install maven -y
+    sudo apt-get install maven -y
     print_success "Mavenのインストールが完了しました"
 fi
 
@@ -58,7 +59,7 @@ if systemctl is-active --quiet mariadb; then
     print_success "MariaDBは既に起動しています"
 else
     print_info "MariaDBをインストール・起動します..."
-    sudo dnf install mariadb105-server -y
+    sudo apt-get install mariadb-server -y
     sudo systemctl start mariadb
     sudo systemctl enable mariadb
     print_success "MariaDBのインストール・起動が完了しました"
@@ -78,7 +79,7 @@ if [ ! -d "demo-struts1" ]; then
     exit 1
 fi
 
-cd demo-struts1/demo-struts1
+cd demo-struts1
 print_success "demo-struts1ディレクトリに移動しました"
 
 
@@ -98,14 +99,19 @@ mysql -u root -e "CREATE DATABASE IF NOT EXISTS demo;"
 
 # SQLファイルの実行
 print_info "SQLファイルを実行します..."
-if mysql -u root demo < demo.sql; then
+if mysql -u root demo < demo.sql 2>/dev/null; then
     print_success "データベースのセットアップが完了しました"
 else
-    print_error "SQLファイルの実行に失敗しました"
-    print_info "手動でSQLファイルを確認してください:"
-    echo "  cat demo.sql"
-    echo "  mysql -u root demo < demo.sql"
-    exit 1
+    # Check if tables exist (might be already set up)
+    if mysql -u root demo -e "SHOW TABLES;" | grep -q "task\|user"; then
+        print_success "データベースは既にセットアップされています"
+    else
+        print_error "SQLファイルの実行に失敗しました"
+        print_info "手動でSQLファイルを確認してください:"
+        echo "  cat demo.sql"
+        echo "  mysql -u root demo < demo.sql"
+        exit 1
+    fi
 fi
 
 # Step 6: Hibernate設定の確認
@@ -140,7 +146,7 @@ echo ""
 print_success "=== セットアップが完了しました！ ==="
 echo ""
 print_info "アプリケーションを起動するには以下のコマンドを実行してください:"
-echo "  cd demo-struts1/demo-struts1"
+echo "  cd demo-struts1"
 echo "  mvn jetty:run"
 echo ""
 print_info "起動後、以下のURLでアクセスできます:"

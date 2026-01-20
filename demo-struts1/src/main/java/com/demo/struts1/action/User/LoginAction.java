@@ -1,6 +1,5 @@
 package com.demo.struts1.action.User;
 
-import com.demo.struts1.action.Spotify.SpotifyCreateAction;
 import com.demo.struts1.dao.UserDao;
 import com.demo.struts1.form.LoginForm;
 import com.demo.struts1.model.User;

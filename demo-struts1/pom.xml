@@ -127,6 +127,13 @@
             <version>4.2.0.RELEASE</version>
         </dependency>
 
+        <!-- Spring Web for CharacterEncodingFilter -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>4.3.30.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <properties>
