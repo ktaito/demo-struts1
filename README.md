@@ -1,6 +1,6 @@
 # Struts1 Demo Application
 
-Amazon Linux 2023用のStruts1デモアプリケーションです。
+Struts1 で書かれた ToDo デモアプリケーション
 
 ## 概要
 
@@ -13,7 +13,7 @@ Amazon Linux 2023用のStruts1デモアプリケーションです。
 ## 機能
 
 - ユーザー認証（ログイン/ログアウト）
-- Spotify楽曲データの表示・管理
+- タスク管理・ダッシュボード機能
 - ページネーション機能
 - Hibernate ORM によるデータベース操作
 
