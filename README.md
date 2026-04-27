@@ -22,7 +22,7 @@ Struts1 で書かれた ToDo デモアプリケーション
 ### 前提条件
 
 - Amazon Linux 2023
-- Java 17
+- Java 8
 - Maven 3.6+
 - MariaDB 10.5+
 

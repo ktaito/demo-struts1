@@ -30,10 +30,10 @@ if command -v java &> /dev/null; then
     JAVA_VERSION=$(java -version 2>&1 | head -n 1)
     print_success "Java is already installed: $JAVA_VERSION"
 else
-    print_info "Javaがインストールされていません。Java 17をインストールします..."
+    print_info "Javaがインストールされていません。Java 8をインストールします..."
     sudo apt-get update
-    sudo apt-get install openjdk-17-jdk -y
-    print_success "Java 17のインストールが完了しました"
+    sudo apt-get install openjdk-8-jdk -y
+    print_success "Java 8のインストールが完了しました"
 fi
 
 # Javaバージョン確認
@@ -135,7 +135,7 @@ if [ $? -eq 0 ]; then
 else
     print_error "ビルドに失敗しました"
     print_info "pom.xmlの設定を確認してください"
-    print_info "Java 17が正しくインストールされているか確認してください:"
+    print_info "Java 8が正しくインストールされているか確認してください:"
     echo "  java -version"
     echo "  mvn -version"
     exit 1

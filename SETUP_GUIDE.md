@@ -11,8 +11,8 @@
 ## 必要なソフトウェア
 
 ### 1. Java（JDK）
-- **推奨バージョン**: Java 17
-- **実績**: Java 17で動作確認済み
+- **推奨バージョン**: Java 8
+- **実績**: Java 8で動作確認済み
 
 ### 2. Maven
 - **バージョン**: 3.6以上
@@ -33,12 +33,12 @@
 java -version
 ```
 
-**既にインストールされている場合**: そのまま使用可能（Java 17推奨）
+**既にインストールされている場合**: そのまま使用可能（Java 8推奨）
 
 **インストールされていない場合**:
 ```bash
-# Amazon Linux 2023でJava 17をインストール
-sudo dnf install java-17-amazon-corretto-devel -y
+# Amazon Linux 2023でJava 8をインストール
+sudo dnf install java-1.8.0-amazon-corretto-devel -y
 
 # インストール確認
 java -version
@@ -281,8 +281,8 @@ Target option 5 is no longer supported. Use 7 or later.
 
 ```xml
 <properties>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 </properties>
 ```
@@ -295,8 +295,8 @@ Target option 5 is no longer supported. Use 7 or later.
     <artifactId>maven-compiler-plugin</artifactId>
     <version>3.11.0</version>
     <configuration>
-        <source>17</source>
-        <target>17</target>
+        <source>1.8</source>
+        <target>1.8</target>
         <encoding>UTF-8</encoding>
     </configuration>
 </plugin>
