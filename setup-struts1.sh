@@ -24,20 +24,52 @@ print_warning() {
     echo -e "\033[33m[WARNING]\033[0m $1"
 }
 
-# Step 1: Javaのインストール確認とインストール
-print_info "Step 1: Javaのインストール確認..."
-if command -v java &> /dev/null; then
-    JAVA_VERSION=$(java -version 2>&1 | head -n 1)
-    print_success "Java is already installed: $JAVA_VERSION"
-else
-    print_info "Javaがインストールされていません。Java 8をインストールします..."
+# Step 1: Java 8のインストールとJAVA_HOME設定
+print_info "Step 1: Java 8のインストールと環境設定..."
+
+# Java 8がインストールされていなければインストール
+if [ ! -d "/usr/lib/jvm/java-8-openjdk-amd64" ]; then
+    print_info "Java 8をインストールします..."
     sudo apt-get update
     sudo apt-get install openjdk-8-jdk -y
     print_success "Java 8のインストールが完了しました"
+else
+    print_success "Java 8は既にインストールされています"
 fi
 
-# Javaバージョン確認
-java -version
+# JAVA_HOMEをJava 8に設定（このスクリプト内で有効）
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+export PATH="$JAVA_HOME/bin:$PATH"
+
+# システムのデフォルトJavaをJava 8に切り替え
+sudo update-alternatives --set java "$JAVA_HOME/jre/bin/java" 2>/dev/null || \
+    sudo update-alternatives --set java "$JAVA_HOME/bin/java" 2>/dev/null || true
+sudo update-alternatives --set javac "$JAVA_HOME/bin/javac" 2>/dev/null || true
+
+# JAVA_HOMEを.bashrcに永続化（既に設定済みなら上書き）
+BASHRC="$HOME/.bashrc"
+if grep -q "^export JAVA_HOME=" "$BASHRC" 2>/dev/null; then
+    sed -i 's|^export JAVA_HOME=.*|export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64|' "$BASHRC"
+    print_info "既存のJAVA_HOME設定をJava 8に更新しました（~/.bashrc）"
+else
+    echo '' >> "$BASHRC"
+    echo '# Java 8 設定（setup-struts1.shにより追加）' >> "$BASHRC"
+    echo 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64' >> "$BASHRC"
+    echo 'export PATH=$JAVA_HOME/bin:$PATH' >> "$BASHRC"
+    print_info "JAVA_HOME設定を~/.bashrcに追加しました"
+fi
+
+print_info "JAVA_HOME=$JAVA_HOME"
+
+# Javaバージョン確認（Java 8であることを検証）
+JAVA_VER=$("$JAVA_HOME/bin/java" -version 2>&1 | head -n 1)
+print_success "使用するJava: $JAVA_VER"
+if echo "$JAVA_VER" | grep -q '"1\.8\.'; then
+    print_success "Java 8が正しく設定されました"
+else
+    print_error "Java 8の設定に失敗しました: $JAVA_VER"
+    exit 1
+fi
 
 # Step 2: Mavenのインストール
 print_info "Step 2: Mavenのインストール確認..."
@@ -50,8 +82,9 @@ else
     print_success "Mavenのインストールが完了しました"
 fi
 
-# Mavenバージョン確認
+# Mavenバージョン確認（Java 8を使用していることを確認）
 mvn -version
+print_info "MavenがJava 8を使用していることを確認してください（上記出力のJava version）"
 
 # Step 3: MariaDBのインストールと起動
 print_info "Step 3: MariaDBのセットアップ..."
